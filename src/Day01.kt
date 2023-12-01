@@ -1,21 +1,20 @@
 fun main() {
     val numbers = arrayOf("zero","one","two","three","four","five","six","seven","eight","nine")
     fun part1(input: List<String>): Int {
-        return input.map { it.filter { c -> c in '0'..'9' } }.sumOf { String(charArrayOf(it[0], it[it.length - 1])).toInt() }
+        return input.map { it.filter { c -> c in '0'..'9' } }.sumOf { String(charArrayOf(it.first(), it.last())).toInt() }
     }
 
     fun part2(input: List<String>): Int {
-        return input
-            .map { line ->
-                line.indices.map {
-                    ndx ->
-                    if (line[ndx] in '0'..'9') {
-                        (""+line[ndx]).toInt()
-                    } else {
-                        (1 .. 9).find { numIndex -> line.indexOf(numbers[numIndex], ndx) == ndx} ?: -1
-                    }
-                }.filter { it > -1}
-            }.map { arr -> ("" + arr[0] + arr[arr.size - 1]).toInt() }.sum()
+        return input.map { line ->
+            line.indices.map {
+                ndx ->
+                if (line[ndx] in '0'..'9') {
+                    (""+line[ndx]).toInt()
+                } else {
+                    (1 .. 9).find { line.indexOf(numbers[it], ndx) == ndx} ?: -1
+                }
+            }.filter { it > -1 }
+        }.map { arr -> ("" + arr.first() + arr.last()).toInt() }.sum()
     }
 
     // test if implementation meets criteria from the description, like:
