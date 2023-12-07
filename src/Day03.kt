@@ -10,10 +10,10 @@ fun main() {
                     var end = line.substring(lineIndex).indexOfFirst{ !it.isDigit() } + lineIndex
                     if (end < lineIndex) end = line.length
 
-                    if ((max(0, lineIndex - 1) until min(line.length, end + 1)).any { xIndex ->
+                    if ((max(0, lineIndex - 1) until min(line.length, end + 1)).any { x ->
                             (max(0, numIndex - 1) until min(input.size, numIndex + 2))
-                                .filter { yIndex -> yIndex != numIndex || xIndex < lineIndex || xIndex >= end }
-                                .any { yIndex -> !input[yIndex][xIndex].isDigit() && input[yIndex][xIndex] != '.' }
+                                .filter { y -> y != numIndex || x < lineIndex || x >= end }
+                                .any { yIndex -> !input[yIndex][x].isDigit() && input[yIndex][x] != '.' }
                         }) {
                         tally += line.substring(lineIndex, end).toInt()
                     }
